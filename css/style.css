@@ -17,7 +17,7 @@ h1 {
 }
 
 .cat-container {
-  width: 600px;
+  width: 500px;
   margin: 0 auto;
 }
 
@@ -43,4 +43,26 @@ h1 {
 .cat-img {
   height: 600px;
   cursor: pointer;
+}
+
+.admin-panel {
+  width: calc(100% - 150px);
+}
+
+.admin-show {
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  height: 40px;
+  font-size: 18px;
+}
+
+.cat-form {
+  display: none;
+  width: 500px;
+  margin: 30px auto;
+}
+
+.cat-form fieldset {
+  border-width: 0;
 }

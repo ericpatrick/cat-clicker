@@ -49,6 +49,12 @@ Model.prototype.incrementSelectedCatClick = function() {
   this._selectedCat.clickCount++;
 }
 
+Model.prototype.updateSelectedCat = function(cat) {
+  this._selectedCat.name = cat.name;
+  this._selectedCat.img = cat.img;
+  this._selectedCat.clickCount = cat.clickCount;
+}
+
 
 var View = function() {
 };
@@ -113,6 +119,59 @@ CatView.prototype.render = function() {
   this.catClickCountElem.textContent = cat.clickCount;
 };
 
+var CatAdminView = function() {
+
+}
+
+CatAdminView.prototype = Object.create(View.prototype);
+
+CatAdminView.prototype.constructor = CatAdminView;
+
+CatAdminView.prototype.init = function() {
+  var self = this;
+  this.adminButtonElem = document.getElementsByClassName("admin-show")[0];
+  
+  this.adinFormElem = document.getElementsByClassName("cat-form")[0];
+  this.formInputNameElem = document.getElementById("input-name");
+  this.formInputImgElem = document.getElementById("input-img");
+  this.formInputClickCountElem = document.getElementById("input-click-count");
+  this.formCancelButtonElem = document.getElementsByClassName("form-cancel")[0];
+  this.formSaveButtonElem = document.getElementsByClassName("form-save")[0];
+  
+  this.adminButtonElem.addEventListener("click", function() {
+    self.fillForm();
+    self.adinFormElem.style.display = "block";
+  });
+
+  this.formCancelButtonElem.addEventListener("click", function() {
+    self.adinFormElem.style.display = "none";
+  });
+
+  this.formSaveButtonElem.addEventListener("click", function() {
+    self.submitForm();
+    self.adinFormElem.style.display = "none";
+    octopus.renderCats();
+  });
+};
+
+CatAdminView.prototype.fillForm = function() {
+  var selectedCat = octopus.getSelectedCat();
+
+  this.formInputNameElem.value = selectedCat.name;
+  this.formInputImgElem.value = selectedCat.img;
+  this.formInputClickCountElem.value = selectedCat.clickCount;
+};
+
+CatAdminView.prototype.submitForm = function() {
+  var catEdited = {
+    name: this.formInputNameElem.value,
+    img: this.formInputImgElem.value,
+    clickCount: this.formInputClickCountElem.value
+  }
+
+  octopus.editSelectedCat(catEdited);
+};
+
 var Octopus = function() {
   this._model = new Model();
   
@@ -120,12 +179,14 @@ var Octopus = function() {
   
   this._catListView = new CatListView(cats);
   this._catView = new CatView();
+  this._catAdminView = new CatAdminView();
 };
 
 Octopus.prototype.init = function() {
   this._model.setSelectedCat(0);
   this._catListView.init();
   this._catView.init();
+  this._catAdminView.init();
 };
 
 Octopus.prototype.getCats = function() {
@@ -148,6 +209,15 @@ Octopus.prototype.incrementCurrentCatClick = function() {
 Octopus.prototype.renderCatView = function() {
   this._catView.render();
 };
+
+Octopus.prototype.editSelectedCat = function(cat) {
+  this._model.updateSelectedCat(cat);
+}
+
+Octopus.prototype.renderCats = function() {
+  this._catListView.render();
+  this._catView.render();
+}
 
 var octopus = new Octopus();
 octopus.init();

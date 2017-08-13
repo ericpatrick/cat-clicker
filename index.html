@@ -12,18 +12,39 @@
   <header>
     <h1>Cat Clicker</h1>
   </header>
-  <main class="cat-show">
-    <nav class="cat-menu">
-      <ul class="cat-list">
-        
-      </ul>
-    </nav>
+  <section class="cat-show">
     <section class="cat-container">
       <h2 class="cat-name"></h2>
       <img class="cat-img" src="" alt="">
       <p class="cat-click-count"></p>
     </section>
-  </main>
+    <nav class="cat-menu">
+      <ul class="cat-list">
+        
+      </ul>
+    </nav>
+  </section>
+  <section class="admin-panel">
+    <button class="admin-show">Admin</button>
+    <form class="cat-form">
+      <fieldset>
+        <label for="input-name">Name:</label>
+        <input type="text" id="input-name">
+      </fieldset>
+      <fieldset>
+        <label for="input-img">Image URL:</label>
+        <input type="text" id="input-img">
+      </fieldset>
+      <fieldset>
+        <label for="input-click-count">CLick Count:</label>
+        <input type="text" id="input-click-count">
+      </fieldset>
+      <fieldset>
+        <button class="form-cancel" type="button">Cancel</button>
+        <button class="form-save" type="button">Save</button>
+      </fieldset>
+    </form>
+  </section>
   <script async src="js/app.js"></script>
 </body>
 </html>

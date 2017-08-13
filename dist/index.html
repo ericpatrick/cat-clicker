@@ -7,27 +7,48 @@
   <title>Cat Clicker</title>
 
   <style>
-.cat-list,h1{text-align:center}*{box-sizing:border-box}h1{font-size:36px}.cat-show{display:flex;flex-direction:row}.cat-menu{width:150px}.cat-container{width:600px;margin:0 auto}.cat-list{width:100%;list-style:none;padding:0}.cat-list li{height:40px;border-top:1px solid #7c7c7c;font-size:20px;padding:7px;cursor:pointer}.cat-list li:last-child{border-bottom:1px solid #7c7c7c}.cat-img{height:600px;cursor:pointer}
+.cat-list,h1{text-align:center}*{box-sizing:border-box}h1{font-size:36px}.cat-show{display:flex;flex-direction:row}.cat-menu{width:150px}.cat-container{width:500px;margin:0 auto}.cat-list{width:100%;list-style:none;padding:0}.cat-list li{height:40px;border-top:1px solid #7c7c7c;font-size:20px;padding:7px;cursor:pointer}.cat-list li:last-child{border-bottom:1px solid #7c7c7c}.cat-img{height:600px;cursor:pointer}.admin-panel{width:calc(100% - 150px)}.admin-show{display:block;margin:0 auto;width:100px;height:40px;font-size:18px}.cat-form{display:none;width:500px;margin:30px auto}.cat-form fieldset{border-width:0}
 </style>
 </head>
 <body>
   <header>
     <h1>Cat Clicker</h1>
   </header>
-  <main class="cat-show">
-    <nav class="cat-menu">
-      <ul class="cat-list">
-        
-      </ul>
-    </nav>
+  <section class="cat-show">
     <section class="cat-container">
       <h2 class="cat-name"></h2>
       <img class="cat-img" src="" alt="">
       <p class="cat-click-count"></p>
     </section>
-  </main>
+    <nav class="cat-menu">
+      <ul class="cat-list">
+        
+      </ul>
+    </nav>
+  </section>
+  <section class="admin-panel">
+    <button class="admin-show">Admin</button>
+    <form class="cat-form">
+      <fieldset>
+        <label for="input-name">Name:</label>
+        <input type="text" id="input-name">
+      </fieldset>
+      <fieldset>
+        <label for="input-img">Image URL:</label>
+        <input type="text" id="input-img">
+      </fieldset>
+      <fieldset>
+        <label for="input-click-count">CLick Count:</label>
+        <input type="text" id="input-click-count">
+      </fieldset>
+      <fieldset>
+        <button class="form-cancel" type="button">Cancel</button>
+        <button class="form-save" type="button">Save</button>
+      </fieldset>
+    </form>
+  </section>
   <script async>
-var Model=function(){this._selectedCat=null,this._cats=[{name:"Faísca",img:"img/faisca.jpg",clickCount:0},{name:"Galileu",img:"img/galileu.jpg",clickCount:0},{name:"Hunter",img:"img/hunter.jpg",clickCount:0},{name:"Maggie",img:"img/maggie.jpg",clickCount:0},{name:"Pancho e Missy",img:"img/pancho-missy.jpg",clickCount:0}]};Model.prototype.getAllCats=function(){return this._cats},Model.prototype.getCat=function(t){return this._cats[t]},Model.prototype.setSelectedCat=function(t){this._selectedCat=this._cats[t]},Model.prototype.getSelectedCat=function(){return this._selectedCat},Model.prototype.incrementSelectedCatClick=function(){this._selectedCat.clickCount++};var View=function(){};View.prototype.init=function(){},View.prototype.render=function(){};var CatListView=function(t){this._catsList=t};CatListView.prototype=Object.create(View.prototype),CatListView.prototype.constructor=CatListView,CatListView.prototype.init=function(){this.catListElem=document.getElementsByClassName("cat-list")[0],this.render()},CatListView.prototype.render=function(){this.catListElem.innerHTML="",this._catsList.forEach(function(t,e){var i=document.createElement("li");i.textContent=t.name,i.addEventListener("click",function(t){return function(){octopus.setSelectedCat(t),octopus.renderCatView()}}(e)),this.catListElem.appendChild(i)},this)};var CatView=function(){};CatView.prototype=Object.create(View.prototype),CatView.prototype.constructor=CatView,CatView.prototype.init=function(){this.catNameElem=document.getElementsByClassName("cat-name")[0],this.catImgElem=document.getElementsByClassName("cat-img")[0],this.catClickCountElem=document.getElementsByClassName("cat-click-count")[0],this.catImgElem.addEventListener("click",function(){octopus.incrementCurrentCatClick()}),this.render()},CatView.prototype.render=function(){var t=octopus.getSelectedCat();this.catNameElem.textContent=t.name,this.catImgElem.src=t.img,this.catClickCountElem.textContent=t.clickCount};var Octopus=function(){this._model=new Model;var t=this._model.getAllCats();this._catListView=new CatListView(t),this._catView=new CatView};Octopus.prototype.init=function(){this._model.setSelectedCat(0),this._catListView.init(),this._catView.init()},Octopus.prototype.getCats=function(){return this._model.getAllCats()},Octopus.prototype.getSelectedCat=function(){return this._model.getSelectedCat()},Octopus.prototype.setSelectedCat=function(t){this._model.setSelectedCat(t)},Octopus.prototype.incrementCurrentCatClick=function(){this._model.incrementSelectedCatClick(),this._catView.render()},Octopus.prototype.renderCatView=function(){this._catView.render()};var octopus=new Octopus;octopus.init();
+var Model=function(){this._selectedCat=null,this._cats=[{name:"Faísca",img:"img/faisca.jpg",clickCount:0},{name:"Galileu",img:"img/galileu.jpg",clickCount:0},{name:"Hunter",img:"img/hunter.jpg",clickCount:0},{name:"Maggie",img:"img/maggie.jpg",clickCount:0},{name:"Pancho e Missy",img:"img/pancho-missy.jpg",clickCount:0}]};Model.prototype.getAllCats=function(){return this._cats},Model.prototype.getCat=function(t){return this._cats[t]},Model.prototype.setSelectedCat=function(t){this._selectedCat=this._cats[t]},Model.prototype.getSelectedCat=function(){return this._selectedCat},Model.prototype.incrementSelectedCatClick=function(){this._selectedCat.clickCount++},Model.prototype.updateSelectedCat=function(t){this._selectedCat.name=t.name,this._selectedCat.img=t.img,this._selectedCat.clickCount=t.clickCount};var View=function(){};View.prototype.init=function(){},View.prototype.render=function(){};var CatListView=function(t){this._catsList=t};CatListView.prototype=Object.create(View.prototype),CatListView.prototype.constructor=CatListView,CatListView.prototype.init=function(){this.catListElem=document.getElementsByClassName("cat-list")[0],this.render()},CatListView.prototype.render=function(){this.catListElem.innerHTML="",this._catsList.forEach(function(t,e){var i=document.createElement("li");i.textContent=t.name,i.addEventListener("click",function(t){return function(){octopus.setSelectedCat(t),octopus.renderCatView()}}(e)),this.catListElem.appendChild(i)},this)};var CatView=function(){};CatView.prototype=Object.create(View.prototype),CatView.prototype.constructor=CatView,CatView.prototype.init=function(){this.catNameElem=document.getElementsByClassName("cat-name")[0],this.catImgElem=document.getElementsByClassName("cat-img")[0],this.catClickCountElem=document.getElementsByClassName("cat-click-count")[0],this.catImgElem.addEventListener("click",function(){octopus.incrementCurrentCatClick()}),this.render()},CatView.prototype.render=function(){var t=octopus.getSelectedCat();this.catNameElem.textContent=t.name,this.catImgElem.src=t.img,this.catClickCountElem.textContent=t.clickCount};var CatAdminView=function(){};CatAdminView.prototype=Object.create(View.prototype),CatAdminView.prototype.constructor=CatAdminView,CatAdminView.prototype.init=function(){var t=this;this.adminButtonElem=document.getElementsByClassName("admin-show")[0],this.adinFormElem=document.getElementsByClassName("cat-form")[0],this.formInputNameElem=document.getElementById("input-name"),this.formInputImgElem=document.getElementById("input-img"),this.formInputClickCountElem=document.getElementById("input-click-count"),this.formCancelButtonElem=document.getElementsByClassName("form-cancel")[0],this.formSaveButtonElem=document.getElementsByClassName("form-save")[0],this.adminButtonElem.addEventListener("click",function(){t.fillForm(),t.adinFormElem.style.display="block"}),this.formCancelButtonElem.addEventListener("click",function(){t.adinFormElem.style.display="none"}),this.formSaveButtonElem.addEventListener("click",function(){t.submitForm(),t.adinFormElem.style.display="none",octopus.renderCats()})},CatAdminView.prototype.fillForm=function(){var t=octopus.getSelectedCat();this.formInputNameElem.value=t.name,this.formInputImgElem.value=t.img,this.formInputClickCountElem.value=t.clickCount},CatAdminView.prototype.submitForm=function(){var t={name:this.formInputNameElem.value,img:this.formInputImgElem.value,clickCount:this.formInputClickCountElem.value};octopus.editSelectedCat(t)};var Octopus=function(){this._model=new Model;var t=this._model.getAllCats();this._catListView=new CatListView(t),this._catView=new CatView,this._catAdminView=new CatAdminView};Octopus.prototype.init=function(){this._model.setSelectedCat(0),this._catListView.init(),this._catView.init(),this._catAdminView.init()},Octopus.prototype.getCats=function(){return this._model.getAllCats()},Octopus.prototype.getSelectedCat=function(){return this._model.getSelectedCat()},Octopus.prototype.setSelectedCat=function(t){this._model.setSelectedCat(t)},Octopus.prototype.incrementCurrentCatClick=function(){this._model.incrementSelectedCatClick(),this._catView.render()},Octopus.prototype.renderCatView=function(){this._catView.render()},Octopus.prototype.editSelectedCat=function(t){this._model.updateSelectedCat(t)},Octopus.prototype.renderCats=function(){this._catListView.render(),this._catView.render()};var octopus=new Octopus;octopus.init();
 </script>
 </body>
 </html>
