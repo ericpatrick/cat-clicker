@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+  font-size: 36px;
+}
+
+.cat-show {
+  display: flex;
+  flex-direction: row
+}
+
+.cat-menu {
+  width: 150px;
+}
+
+.cat-container {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.cat-list {
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.cat-list li {
+  height: 40px;
+  border-top: 1px solid #7c7c7c;
+  font-size: 20px;
+  padding: 7px;
+  cursor: pointer;
+}
+
+.cat-list li:last-child {
+  border-bottom: 1px solid #7c7c7c;
+}
+
+.cat-img {
+  height: 600px;
+  cursor: pointer;
+}
